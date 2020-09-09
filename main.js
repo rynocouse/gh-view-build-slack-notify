@@ -29,7 +29,7 @@ const compare = context.payload.compare;
 
 const jobStatusColorMap = {
     success: 'good',
-    failure: 'danger',
+    failure: '#ff0000',
     cancelled: 'warning',
 };
 
