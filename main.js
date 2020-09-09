@@ -7,8 +7,8 @@ const slack = require('slack');
 const { context } = github;
 
 const status = core.getInput('status') || 'STARTING';
-const channel = core.getInput('channel') || 'test-private';
-const original_ts = core.getInput('original-ts') || 'test-private';
+const channel = core.getInput('channel') || process.env.SLACK_CHANNEL || 'test-private';
+const original_ts = core.getInput('original-ts');
 const url = core.getInput('url') || 'Unknown';
 const token = core.getInput('token') || 'Unknown';
 
