@@ -1,0 +1,28 @@
+{
+    "name": "gh-view-build-slack-notify",
+    "version": "1.0.0",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rynocouse/gh-view-build-slack-notify.git"
+    },
+    "keywords": [
+        "github",
+        "actions",
+        "github actions",
+        "aws",
+        "amazon"
+    ],
+    "author": "Ryan Couse",
+    "bugs": {
+        "url": "https://github.com/rynocouse/gh-view-build-slack-notify/issues"
+    },
+    "homepage": "https://github.com/rynocouse/gh-view-build-slack-notify#readme",
+    "dependencies": {
+        "@actions/core": "^1.1.0",
+        "slack": "^11.0.2"
+    }
+}

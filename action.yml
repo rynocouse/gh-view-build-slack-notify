@@ -1,0 +1,9 @@
+name: Project ENV Vars
+author: rynocouse
+description: Create convention based project name & slugs.
+runs:
+    using: node12
+    main: 'main.js'
+branding:
+    icon: upload
+    color: orange

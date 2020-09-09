@@ -1,1 +1,1 @@
-# gh-view-build-slack-notify
+# Slack Notify for Github Actions
