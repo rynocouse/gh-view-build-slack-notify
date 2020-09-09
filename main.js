@@ -6,13 +6,14 @@ const Slack = require('slack');
 
 const { context } = github;
 
-core.debug(JSON.stringify(process.env, null, 2));
-
 const status = core.getInput('status') || 'STARTING';
-const channel = core.getInput('channel') || process.env.SLACK_CHANNEL || 'test-private';
-const original_ts = core.getInput('original-ts');
 const url = core.getInput('url') || 'Unknown';
-const token = core.getInput('token') || process.env.SLACK_OAUTH_ACCESS_TOKEN;
+const token = process.env.SLACK_OAUTH_ACCESS_TOKEN;
+const channel = process.env.SLACK_CHANNEL;
+
+core.debug(`SLACK_CHANNEL: ${process.env.SLACK_CHANNEL}`);
+core.debug(`SLACK_OAUTH_ACCESS_TOKEN: ${process.env.SLACK_OAUTH_ACCESS_TOKEN}`);
+core.debug(`SLACK_MESSAGE_TS: ${process.env.SLACK_MESSAGE_TS}`);
 
 const bot = new Slack({ token });
 
@@ -81,7 +82,6 @@ core.debug(JSON.stringify(message, null, 2));
         core.debug(JSON.stringify(result, null, 2));
         core.exportVariable('SLACK_MESSAGE_TS', result.ts);
     } else {
-        core.debug(JSON.stringify(process.env, null, 2));
         const result = await bot.chat.update({ ...message, ts: process.env.SLACK_MESSAGE_TS });
         core.debug(JSON.stringify(result, null, 2));
     }
