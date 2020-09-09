@@ -1,9 +1,9 @@
-name: Project ENV Vars
+name: Slack Notify
 author: rynocouse
-description: Create convention based project name & slugs.
+description: Notify Slack channel of deploys
 runs:
     using: node12
-    main: 'main.js'
+    main: 'dist/index.js'
 branding:
     icon: upload
     color: orange
