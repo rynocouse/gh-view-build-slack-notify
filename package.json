@@ -22,7 +22,8 @@
     },
     "homepage": "https://github.com/rynocouse/gh-view-build-slack-notify#readme",
     "dependencies": {
-        "@actions/core": "^1.1.0",
+        "@actions/core": "^1.2.5",
+        "@actions/github": "^4.0.0",
         "slack": "^11.0.2"
     }
 }
