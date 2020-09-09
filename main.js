@@ -38,7 +38,7 @@ const jobStatusMap = {
 };
 
 const text =
-    `Deploy: *<${compare}|\`${branch}\`>*` +
+    `Deploy: <${repositoryUrl}|${repositoryName}>*<${compare}|\`${branch}\`>*` +
     `<${commit.url}|\`${commit.id.slice(0, 8)}\`>: (<${commit.url}/checks|${
         jobStatusMap[status] || 'Unknown'
     }>)`;
