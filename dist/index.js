@@ -61,6 +61,7 @@ const message = {
         {
             fallback: `[GitHub]: [${repositoryName}] ${workflow} ${eventName} ${status}`,
             color: jobStatusColorMap[status] || undefined,
+            text: '',
             blocks: [
                 {
                     type: 'section',
