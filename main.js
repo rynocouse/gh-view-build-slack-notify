@@ -17,11 +17,11 @@ const bot = new Slack({ token });
 const workflow = context.workflow;
 const eventName = context.eventName;
 const repository = context.payload.repository;
-const repositoryName = repository?.full_name;
-const repositoryUrl = repository?.html_url;
+const repositoryName = repository && repository.full_name;
+const repositoryUrl = repository && repository.html_url;
 const sender = context.payload.sender;
 const commit = context.payload.head_commit;
-const branch = context.ref?.replace('refs/heads/', '');
+const branch = (context.ref && context.ref.replace('refs/heads/', '')) || 'unknown';
 const compare = context.payload.compare;
 
 const jobStatusColorMap = {
@@ -45,7 +45,7 @@ const text = `Deploy: *<${compare}|\`${branch}\`>* <${commit.url}|\`${commit.id.
 
 const textUpdated = `${text}\n Link here`;
 
-const ts = new Date(context.payload.repository?.pushed_at);
+const ts = new Date(context.payload.repository.pushed_at);
 
 const message = {
     //   username: 'Github',
