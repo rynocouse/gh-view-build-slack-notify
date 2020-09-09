@@ -35,9 +35,9 @@ const branch = (context.ref && context.ref.replace('refs/heads/', '')) || 'unkno
 const compare = context.payload.compare;
 
 const jobStatusColorMap = {
-    success: 'good',
-    failure: '#ff0000',
-    cancelled: 'warning',
+    success: '#2BA746',
+    failure: '#D73A47',
+    cancelled: '#ffd33d',
 };
 
 const jobStatusMap = {
@@ -53,12 +53,13 @@ const text = `Deploy: <${commit.url}|\`${commit.id.slice(
     8
 )}\`> *<${compare}|\`${branch}\`>*: (<${commit.url}/checks|${jobStatusMap[status] || 'Unknown'}>)`;
 
-const textUpdated = `${text}\n Link here`;
+const textUpdated =
+    status === 'success' ? `${text}\n <https://madeinhaus.com|cool.feature.view.build>` : text;
 
 const ts = new Date(context.payload.repository.pushed_at);
 
 const message = (text) => ({
-    //   username: 'Github',
+    username: 'Github',
     channel,
     text: '',
     attachments: [
