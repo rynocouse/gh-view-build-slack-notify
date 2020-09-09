@@ -70,6 +70,7 @@ const message = {
     ],
 };
 
+// debug
 core.debug(JSON.stringify(message, null, 2));
 
 (async function main() {
