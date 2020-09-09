@@ -7,7 +7,7 @@ const Slack = require('slack');
 const { context } = github;
 
 const status = core.getInput('status') || 'STARTING';
-const url = core.getInput('url') || 'Unknown';
+const domain = core.getInput('domain') || '';
 const token = process.env.SLACK_OAUTH_ACCESS_TOKEN;
 const channel = process.env.SLACK_CHANNEL;
 
@@ -46,8 +46,7 @@ const text = `Deploy: <${commit.url}|\`${commit.id.slice(
     8
 )}\`> *<${compare}|\`${branch}\`>*: (<${commit.url}/checks|${jobStatusMap[status] || 'Unknown'}>)`;
 
-const textUpdated =
-    status === 'success' ? `${text}\n <https://madeinhaus.com|cool.feature.view.build>` : text;
+const textUpdated = status === 'success' ? `${text}\n <https://${domain}|${domain}>` : text;
 
 const ts = new Date(context.payload.repository.pushed_at);
 
@@ -67,9 +66,7 @@ const message = (text) => ({
                     },
                 },
             ],
-            // footer: `<${repositoryUrl}|${repositoryName}>`,
-            // footer_icon: 'https://github.githubassets.com/favicon.ico',
-            // ts: ts.getTime().toString(),
+            ts: ts.getTime().toString(),
         },
     ],
 });
