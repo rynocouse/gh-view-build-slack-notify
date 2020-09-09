@@ -73,15 +73,13 @@ const message = {
 core.debug(JSON.stringify(message, null, 2));
 
 (async function main() {
-    switch (status) {
-        case 'STARTING':
-            const result = await bot.chat.postMessage(message);
-            core.debug(JSON.stringify(result, null, 2));
-            core.exportVariable('SLACK_MESSAGE_TS', result.ts);
-            break;
-        default:
-            core.debug(JSON.stringify(process.env, null, 2));
-            const result = await bot.chat.update({ ...message, ts: process.env.SLACK_MESSAGE_TS });
-            core.debug(JSON.stringify(result, null, 2));
+    if (status === 'STARTING') {
+        const result = await bot.chat.postMessage(message);
+        core.debug(JSON.stringify(result, null, 2));
+        core.exportVariable('SLACK_MESSAGE_TS', result.ts);
+    } else {
+        core.debug(JSON.stringify(process.env, null, 2));
+        const result = await bot.chat.update({ ...message, ts: process.env.SLACK_MESSAGE_TS });
+        core.debug(JSON.stringify(result, null, 2));
     }
 })();
