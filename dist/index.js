@@ -13,14 +13,10 @@ const Slack = __webpack_require__(9135);
 
 const { context } = github;
 
-const status = core.getInput('status') || 'STARTING';
+const status = core.getInput('status') || 'starting';
 const domain = core.getInput('domain') || '';
 const token = process.env.SLACK_OAUTH_ACCESS_TOKEN;
 const channel = process.env.SLACK_CHANNEL;
-
-core.debug(`SLACK_CHANNEL: ${process.env.SLACK_CHANNEL}`);
-core.debug(`SLACK_OAUTH_ACCESS_TOKEN: ${process.env.SLACK_OAUTH_ACCESS_TOKEN}`);
-core.debug(`SLACK_MESSAGE_TS: ${process.env.SLACK_MESSAGE_TS}`);
 
 const bot = new Slack({ token });
 
@@ -48,10 +44,11 @@ const jobStatusMap = {
     skipped: 'Skipped',
 };
 
-const text = `Deploy: <${commit.url}|\`${commit.id.slice(
-    0,
-    8
-)}\`> *<${compare}|\`${branch}\`>*: (<${commit.url}/checks|${jobStatusMap[status] || 'Unknown'}>)`;
+const text =
+    `Deploy: *<${compare}|\`${branch}\`>*` +
+    `<${commit.url}|\`${commit.id.slice(0, 8)}\`>: (<${commit.url}/checks|${
+        jobStatusMap[status] || 'Unknown'
+    }>)`;
 
 const textUpdated = status === 'success' ? `${text}\n <https://${domain}|${domain}>` : text;
 
