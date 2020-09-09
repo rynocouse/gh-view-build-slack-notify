@@ -2,7 +2,7 @@ const { execSync } = require('child_process');
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-const slack = require('slack');
+const Slack = require('slack');
 
 const { context } = github;
 
@@ -52,8 +52,8 @@ const message = {
     channel,
     attachments: [
         {
-            fallback: `[GitHub]: [${repositoryName}] ${workflow} ${eventName} ${jobStatus}`,
-            color: jobStatusColorMap[jobStatus] || undefined,
+            fallback: `[GitHub]: [${repositoryName}] ${workflow} ${eventName} ${status}`,
+            color: jobStatusColorMap[status] || undefined,
             blocks: [
                 {
                     type: 'section',
