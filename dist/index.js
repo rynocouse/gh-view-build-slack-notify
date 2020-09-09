@@ -48,7 +48,7 @@ const jobStatusMap = {
 const text = `Deploy: *<${compare}|\`${branch}\`>* <${commit.url}|\`${commit.id.slice(
     0,
     8
-)}\`>: (<${commit.url}|${jobStatusMap[jobStatus] || 'Unknown'}>)\n`;
+)}\`>: (<${commit.url}|${jobStatusMap[status] || 'Unknown'}>)\n`;
 
 const textUpdated = `${text}\n Link here`;
 
@@ -77,6 +77,7 @@ const message = {
     ],
 };
 
+// debug
 core.debug(JSON.stringify(message, null, 2));
 
 (async function main() {
