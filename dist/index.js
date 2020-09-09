@@ -73,7 +73,6 @@ const message = (text) => ({
                     },
                 },
             ],
-            ts: ts.getTime().toString(),
         },
     ],
 });
