@@ -10,7 +10,7 @@ const status = core.getInput('status') || 'STARTING';
 const channel = core.getInput('channel') || process.env.SLACK_CHANNEL || 'test-private';
 const original_ts = core.getInput('original-ts');
 const url = core.getInput('url') || 'Unknown';
-const token = core.getInput('token') || 'Unknown';
+const token = core.getInput('token') || process.env.SLACK_OAUTH_ACCESS_TOKEN;
 
 const bot = new Slack({ token });
 
