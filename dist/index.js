@@ -48,16 +48,16 @@ const jobStatusMap = {
     skipped: 'Skipped',
 };
 
-const text = `Deploy: *<${compare}|\`${branch}\`>* <${commit.url}|\`${commit.id.slice(
+const text = `Deploy: <${commit.url}|\`${commit.id.slice(
     0,
     8
-)}\`>: (<${commit.url}|${jobStatusMap[status] || 'Unknown'}>)\n`;
+)}\`> *<${compare}|\`${branch}\`>*: (<${commit.url}/checks|${jobStatusMap[status] || 'Unknown'}>)`;
 
 const textUpdated = `${text}\n Link here`;
 
 const ts = new Date(context.payload.repository.pushed_at);
 
-const message = {
+const message = (text) => ({
     //   username: 'Github',
     channel,
     text: '',
@@ -78,20 +78,20 @@ const message = {
             // ts: ts.getTime().toString(),
         },
     ],
-};
+});
 
 // debug
 core.debug(JSON.stringify(message, null, 2));
 
 (async function main() {
     if (status === 'starting') {
-        const result = await bot.chat.postMessage(message);
+        const result = await bot.chat.postMessage(message(text));
         core.debug(JSON.stringify(result, null, 2));
         core.exportVariable('SLACK_MESSAGE_CHANNEL_ID', result.channel);
         core.exportVariable('SLACK_MESSAGE_TS', result.ts);
     } else {
         const result = await bot.chat.update({
-            ...message,
+            ...message(textUpdated),
             channel: process.env.SLACK_MESSAGE_CHANNEL_ID,
             ts: process.env.SLACK_MESSAGE_TS,
         });
