@@ -28,17 +28,17 @@ const branch = (context.ref && context.ref.replace('refs/heads/', '')) || 'unkno
 const compare = context.payload.compare;
 
 const jobStatusColorMap = {
-    SUCCESS: 'good',
-    FAILURE: 'danger',
-    CANCELLED: 'warning',
+    success: 'good',
+    failure: 'danger',
+    cancelled: 'warning',
 };
 
 const jobStatusMap = {
-    STARTING: 'In Progress',
-    SUCCESS: 'Complete',
-    FAILURE: 'Failed',
-    CANCELLED: 'Cancelled',
-    SKIPPED: 'Skipped',
+    starting: 'In Progress',
+    success: 'Complete',
+    failure: 'Failed',
+    cancelled: 'Cancelled',
+    skipped: 'Skipped',
 };
 
 const text = `Deploy: *<${compare}|\`${branch}\`>* <${commit.url}|\`${commit.id.slice(
@@ -77,7 +77,7 @@ const message = {
 core.debug(JSON.stringify(message, null, 2));
 
 (async function main() {
-    if (status === 'STARTING') {
+    if (status === 'starting') {
         const result = await bot.chat.postMessage(message);
         core.debug(JSON.stringify(result, null, 2));
         core.exportVariable('SLACK_MESSAGE_CHANNEL_ID', result.channel);
