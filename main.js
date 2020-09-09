@@ -80,9 +80,14 @@ core.debug(JSON.stringify(message, null, 2));
     if (status === 'STARTING') {
         const result = await bot.chat.postMessage(message);
         core.debug(JSON.stringify(result, null, 2));
+        core.exportVariable('SLACK_MESSAGE_CHANNEL_ID', result.channel);
         core.exportVariable('SLACK_MESSAGE_TS', result.ts);
     } else {
-        const result = await bot.chat.update({ ...message, ts: process.env.SLACK_MESSAGE_TS });
+        const result = await bot.chat.update({
+            ...message,
+            channel: process.env.SLACK_MESSAGE_CHANNEL_ID,
+            ts: process.env.SLACK_MESSAGE_TS,
+        });
         core.debug(JSON.stringify(result, null, 2));
     }
 })();
