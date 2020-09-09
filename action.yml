@@ -4,6 +4,13 @@ description: Notify Slack channel of deploys
 runs:
     using: node12
     main: 'dist/index.js'
+inputs:
+    status:
+        description: project build status.
+        required: true
+    domain:
+        description: the domain of on the dev server.
+        required: true
 branding:
     icon: upload
     color: orange
