@@ -55,7 +55,6 @@ const message = {
     text: '',
     attachments: [
         {
-            fallback: `[GitHub]: [${repositoryName}] ${workflow} ${eventName} ${status}`,
             color: jobStatusColorMap[status] || undefined,
             blocks: [
                 {
@@ -66,9 +65,9 @@ const message = {
                     },
                 },
             ],
-            footer: `<${repositoryUrl}|${repositoryName}>`,
-            footer_icon: 'https://github.githubassets.com/favicon.ico',
-            ts: ts.getTime().toString(),
+            // footer: `<${repositoryUrl}|${repositoryName}>`,
+            // footer_icon: 'https://github.githubassets.com/favicon.ico',
+            // ts: ts.getTime().toString(),
         },
     ],
 };
