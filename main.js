@@ -6,6 +6,8 @@ const Slack = require('slack');
 
 const { context } = github;
 
+core.debug(JSON.stringify(process.env, null, 2));
+
 const status = core.getInput('status') || 'STARTING';
 const channel = core.getInput('channel') || process.env.SLACK_CHANNEL || 'test-private';
 const original_ts = core.getInput('original-ts');
@@ -50,11 +52,11 @@ const ts = new Date(context.payload.repository.pushed_at);
 const message = {
     //   username: 'Github',
     channel,
+    text: '',
     attachments: [
         {
             fallback: `[GitHub]: [${repositoryName}] ${workflow} ${eventName} ${status}`,
             color: jobStatusColorMap[status] || undefined,
-            text: '',
             blocks: [
                 {
                     type: 'section',
